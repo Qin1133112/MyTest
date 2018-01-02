@@ -9,8 +9,10 @@ import com.sun.mail.util.MailSSLSocketFactory;
 
 import javax.activation.*;
 
-public class SendEmailWithQQEmail {
-	public static void main(String[] args) {
+public class SendEmailWithQQEmail
+{
+	public static void main(String[] args)
+	{
 		// 收件人电子邮箱
 		String to = "qin-fei@foxmail.com";
 
@@ -32,25 +34,30 @@ public class SendEmailWithQQEmail {
 
 		// 关于QQ邮箱，还要设置SSL加密，加上以下代码即可
 		MailSSLSocketFactory sf;
-		try {
+		try
+		{
 			sf = new MailSSLSocketFactory();
 			sf.setTrustAllHosts(true);
 			properties.put("mail.smtp.ssl.enable", "true");
 			properties.put("mail.smtp.ssl.socketFactory", sf);
-		} catch (GeneralSecurityException e) {
+		} catch (GeneralSecurityException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		// 获取默认session对象
-		Session session = Session.getDefaultInstance(properties, new Authenticator() {
+		Session session = Session.getDefaultInstance(properties, new Authenticator()
+		{
 			@Override
-			protected PasswordAuthentication getPasswordAuthentication() {
+			protected PasswordAuthentication getPasswordAuthentication()
+			{
 				return new PasswordAuthentication(from, "xxxx");
 			}
 		});
 
-		try {
+		try
+		{
 			// 创建默认的 MimeMessage 对象
 			MimeMessage message = new MimeMessage(session);
 
@@ -72,7 +79,8 @@ public class SendEmailWithQQEmail {
 			// 发送消息
 			Transport.send(message);
 			System.out.println("Sent message successfully....");
-		} catch (MessagingException mex) {
+		} catch (MessagingException mex)
+		{
 			mex.printStackTrace();
 		}
 	}
