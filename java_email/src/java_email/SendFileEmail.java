@@ -52,9 +52,7 @@ public class SendFileEmail
    		Session session = Session.getDefaultInstance(properties, new Authenticator() {
    			@Override
    			protected PasswordAuthentication getPasswordAuthentication() {
-   				// TODO Auto-generated method stub
-//   				return new PasswordAuthentication("1750376793@qq.com", "fnuimxpuxuvgdcbd");
-   				return new PasswordAuthentication(from, "1133112qgr");
+   				return new PasswordAuthentication(from, "xxxx");
    			}
    		});
 

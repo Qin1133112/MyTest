@@ -15,12 +15,12 @@ public class SendEmailWithQQEmail {
 		String to = "qin-fei@foxmail.com";
 
 		// 发件人电子邮箱
-//		String from = "1750376793@qq.com";
-//		String from = "qinguangrui123@163.com";
+		// String from = "1750376793@qq.com";
+		// String from = "qinguangrui123@163.com";
 		String from = "loveyou_12@zoho.com.cn";
 
 		// 指定发送邮件的主机为 localhost
-//		String host = "smtp.qq.com";
+		// String host = "smtp.qq.com";
 		String host = "smtp.zoho.com.cn";
 
 		// 获取系统属性
@@ -46,9 +46,7 @@ public class SendEmailWithQQEmail {
 		Session session = Session.getDefaultInstance(properties, new Authenticator() {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
-				// TODO Auto-generated method stub
-//				return new PasswordAuthentication("1750376793@qq.com", "fnuimxpuxuvgdcbd");
-				return new PasswordAuthentication(from, "1133112qgr");
+				return new PasswordAuthentication(from, "xxxx");
 			}
 		});
 
@@ -66,12 +64,9 @@ public class SendEmailWithQQEmail {
 			message.setSubject("新年快乐");
 
 			// 设置消息体
-			
+
 			String text = "截至到年月日，您的快乐预存款可用余额不足。祝福合计：健康平安发财幸福。请您尽快带本人微笑随时随地补充快乐，谢谢。元旦愉快。";
-			
-			
-			
-			
+
 			message.setText(text);
 
 			// 发送消息
