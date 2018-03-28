@@ -13,6 +13,8 @@
 
     <!-- 自动注入 -->
     <context:component-scan base-package="com.huawei.service.impl" />
+    
+    <bean class="com.huawei.start.StartupListener"></bean>
     <!-- 加载properties文件  -->
     <!--  <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="locations">
