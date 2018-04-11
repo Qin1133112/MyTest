@@ -98,7 +98,7 @@ public class KafkaConfig
 	@Bean
 	public SimpleConsumerListener simpleConsumerListener()
 	{
-		return new SimpleConsumerListener();
+		return new SimpleConsumerListener();  
 	}
 
 }
