@@ -1,4 +1,4 @@
-package com.springboot.demo.myspeingbootdemo;
+package com.springboot.demo;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
