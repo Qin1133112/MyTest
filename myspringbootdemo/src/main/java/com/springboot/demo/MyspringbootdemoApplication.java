@@ -10,6 +10,6 @@ public class MyspringbootdemoApplication
 
 	public static void main(String[] args)
 	{
-		SpringApplication.run(MyspringbootdemoApplication.class, args);
+		SpringApplication.run(MyspringbootdemoApplication.class, args); 
 	}
 }
