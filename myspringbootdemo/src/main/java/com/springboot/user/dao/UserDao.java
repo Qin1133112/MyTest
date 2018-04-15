@@ -35,4 +35,6 @@ public interface UserDao
 	
 	@Delete("delete from user where id=#{id}")
 	public boolean delete(User user);
+
+	public boolean deleteBatch(List<Integer> ids);
 }

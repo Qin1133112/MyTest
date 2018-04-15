@@ -13,4 +13,6 @@ public interface UserService
 	public boolean modify(User user);
 
 	public boolean delete(User user);
+
+	public boolean delete(List<Integer> ids);
 }

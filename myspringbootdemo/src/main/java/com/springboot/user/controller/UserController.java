@@ -1,15 +1,22 @@
 package com.springboot.user.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.springboot.user.domain.User;
 import com.springboot.user.service.UserService;
+import com.springboot.utils.JackUtils;
 
 //证明是controller层并且返回json
 @RestController
@@ -64,5 +71,41 @@ public class UserController
 			return "fail";
 		}
 	}
+	
+	@PostMapping("removeAll")
+	public String remove(@RequestBody List<Integer> ids)
+	{
+		boolean add = userService.delete(ids);
+		if (add)
+		{
+			return "sucess";
+		} else
+		{
+			return "fail";
+		}
+	}
+	
+	@PostMapping("test")
+	public String test(@RequestBody List<Integer> ids)
+	{
+		System.out.println(ids);
+		String json = JackUtils.bean2Json(ids);
+		return json;
+		
+	}
+	
+//	public static void main(String[] args)
+//	{
+//		List<Integer> ids = new ArrayList<>();
+//		ids.add(1);
+//		ids.add(2);
+//		ids.add(3);
+//		System.out.println(ids);
+//		String idss = JackUtils.bean2Json(ids);
+//		System.out.println(idss);
+//		
+//		List<Integer> is = JackUtils.json2Bean(idss, List.class);
+//		System.out.println(is);
+//	}
 
 }
