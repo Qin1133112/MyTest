@@ -27,4 +27,9 @@
 		 where id=#{id}
 	</update>
 	
+	<delete id="deleteBatch" parameterType="java.util.List">
+		delete from user where id in
+		<foreach item="id" collection="list" open="(" close=")" separator=",">#{id}</foreach>
+	</delete>
+	
 </mapper>

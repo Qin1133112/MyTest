@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -24,6 +26,7 @@ import com.springboot.utils.JackUtils;
 @ComponentScan(basePackages = { "com.springboot.user.service" }) // 添加的注解
 public class UserController
 {
+	Logger logger = LoggerFactory.getLogger(UserController.class);
 	@Autowired
 	UserService userService;
 
@@ -39,9 +42,11 @@ public class UserController
 		boolean add = userService.add(user);
 		if (add)
 		{
+			logger.info("sucess");
 			return "sucess";
 		} else
 		{
+			logger.info("fail");
 			return "fail";
 		}
 	}
@@ -52,9 +57,11 @@ public class UserController
 		boolean add = userService.modify(user);
 		if (add)
 		{
+			logger.info("sucess");
 			return "sucess";
 		} else
 		{
+			logger.info("fail");
 			return "fail";
 		}
 	}
@@ -65,9 +72,11 @@ public class UserController
 		boolean add = userService.delete(user);
 		if (add)
 		{
+			logger.info("sucess");
 			return "sucess";
 		} else
 		{
+			logger.info("fail");
 			return "fail";
 		}
 	}
@@ -78,9 +87,11 @@ public class UserController
 		boolean add = userService.delete(ids);
 		if (add)
 		{
+			logger.info("sucess");
 			return "sucess";
 		} else
 		{
+			logger.info("fail");
 			return "fail";
 		}
 	}

@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.springboot.demo</groupId>
-	<artifactId>myspeingbootdemo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>mykafka</artifactId>
+	<version>1.0</version>
 	<packaging>jar</packaging>
 
-	<name>myspeingbootdemo</name>
+	<name>mykafka</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -46,11 +46,11 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework.boot</groupId> -->
-<!-- 			<artifactId>spring-boot-starter-test</artifactId> -->
-<!-- 			<scope>test</scope> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.boot</groupId> -->
+		<!-- <artifactId>spring-boot-starter-test</artifactId> -->
+		<!-- <scope>test</scope> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.apache.kafka</groupId>
 			<artifactId>kafka_2.12</artifactId>
