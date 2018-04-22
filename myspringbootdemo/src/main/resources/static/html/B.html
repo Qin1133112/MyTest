@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #app {
+            width: 600px;
+            margin: 10px auto;
+        }
+
+        .tb {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .tb th {
+            background-color: #0094ff;
+            color: white;
+        }
+
+        .tb td,
+        .tb th {
+            padding: 5px;
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        .add {
+            padding: 5px;
+            border: 1px solid black;
+            margin-bottom: 10px;
+        }
+    </style>
+    <script src="../js/vue/vue.js"></script>
+	<script src="../js/vue/axios.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="add">
+            品牌名称: <input v-model="name" type="text">
+            <button @click="add">添加</button>
+        </div>
+        <div class="add">品牌名称：<input type="text"></div>
+        <div>
+            <table class="tb">
+                <tr>
+                    <th>编号</th>
+                    <th>品牌名称</th>
+                    <th>创立时间</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-if="list.length <= 0">
+                    <td colspan="4">没有品牌数据</td>
+                </tr>
+                <!--加入: key="index" 时候必须把所有参数写完整  -->
+                <tr v-for="(item,key,index) in list" :key="index">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.ctime}}</td>
+                    <td><a href="#" @click="del(item.id)">删除</a></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</body>
+
+</html>
+
+<script>
+    // 1 将所有的主机名和端口 一起设置
+    axios.defaults.baseURL = "http://157.122.54.189:9093";
+    // 2 将axios添加到Vue的原型对象中
+    Vue.prototype.$http = axios;
+
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            name: '',
+            list: []  // 数据应该来源于服务器提供的api
+        },
+        mounted:function() { //钩子函数
+            this.getList();
+        },
+        methods: {
+            // 得到所有的列表数据,这个方法应该等页面加载完成以后直接被调用的
+            getList:function() {
+                var url = "/api/getprodlist";
+                // 改变this的指向
+                _this = this;
+                this.$http.get(url).then(function(result){
+                    var res = result.data;
+                    if(res.status ==  0) {
+                        //将数据赋值给list
+                        _this.list = res.message;     
+                    }else{
+                        alert("出错了");
+                    }
+                }).catch(function(){
+                    alert("出错了");
+                });
+            },
+            // 得到文本框中的值，并且将值通过api提交到服务器
+            add:function() {
+                var url = "/api/addproduct";
+                _this = this;
+                // 得到name属性对应的值
+                this.$http.post(url,{"name":this.name}).then(function(result){
+                    var res = result.data;
+                    if(res.status == "0") {
+                        alert(res.message);
+                        _this.getList();
+                    }else{
+                        alert(res.message);
+                    }
+                }).catch(function() {
+                    alert("出错了");
+                });
+            },
+            del:function(id){
+                //格局id删除数据
+                var url =   "/api/delproduct/"+id;
+                // 发送异步请求
+                _this = this;
+                this.$http.get(url).then(function(result){
+                    var res = result.data;
+                    if(res.status == "0") {
+                        alert(res.message);
+                        //更新数据
+                        _this.getList();
+                    }else{
+                        alert(res.message);
+                    }
+                    
+                }).catch(function(){
+                    alert("出错了");
+                });
+            }
+        }
+    });
+
+</script>

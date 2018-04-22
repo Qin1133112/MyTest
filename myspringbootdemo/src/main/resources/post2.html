@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>   
+<script src="../vue2.4.4.js"></script>
+<script src="../axios.js"></script>
+
+</head>
+
+<body>
+<!-- 定义一个vue的管理区块，（MVVM中的View） -->
+<div id="app">
+     <button @click="getApiData">点击得到数据</button>
+     <button @click="postApiData">点击提交数据</button>
+    {{name}}
+  
+</div>
+
+</body>
+
+<script>
+    //细节处理一：可以给axios的ajax请求设置统一的主机和端口号
+    axios.defaults.baseURL = "http://157.122.54.189:9093/";
+    //细节处理二: 可以将axios这个对象添加到Vue的原型对象中，将来在使用的时候就只需要使用this.对象名就可以了
+    Vue.prototype.$http = axios;
+
+
+    // 实例化vue对象（MVVM中的View Model）
+    new Vue({
+        // vm控制的区块为id为app的div，此div中的所有vue指令均可以被vm解析
+        el:'#app',
+        data:{
+        // 数据 （MVVM中的Model） 
+        name:"" 
+        },
+        methods:{ 
+            getApiData:function() {
+            //设置请求路径
+            var url  = "api/getprodlist";                
+            // 发送请求:将数据返回到一个回到函数中
+            _this= this;
+            // 并且响应成功以后会执行then方法中的回调函数
+            this.$http.get(url).then(function(result) {
+                // result是所有的返回回来的数据
+                // 包括了响应报文行
+                // 响应报文头
+                // 响应报文体
+                _this.name = result.data.message[0].name;
+            }).catch(function(){
+                alert("出错了");
+            });    
+            },
+
+            postApiData:function() {
+                var url = "api/addproduct";
+                // post有两个参数
+                //参数1:请求的路径
+                //参数2:提交的参数
+                //提交参数的两种形态:
+                //          1.可以直接传入字符串 name=张三&age=19
+                //          2.可以以对象的形式传入{name:"三",age:19}
+                this.$http.post(url,{name:"拖油瓶前来报道3 "}).then(function(res) {
+                   var resData = res.data;
+                   if(resData.status == "0") { //0表示成功，1表示失败    
+                        alert(resData.message);
+                   }else{
+                        alert(resData.message);
+                   }
+                }).catch(function(){
+                     alert("出错了");
+                }); ;
+
+            }
+        }
+    })
+</script>
+</html>
+
+
